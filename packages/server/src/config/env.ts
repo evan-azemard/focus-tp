@@ -1,6 +1,6 @@
+// ? Ce fichier est utilisé pour extraire les variables d'environnement et les configurer pour l'application
 import { EnvConfig } from "../types/env";
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 
 export const env: EnvConfig = {
     PORT: parseInt(process.env.PORT || "3000"),
