@@ -3,7 +3,7 @@ import { pgTable, uuid, varchar, text, date, timestamp } from "drizzle-orm/pg-co
 import { steps } from "./steps.schema";
 
 export const substeps = pgTable("substeps", {
-  id: uuid("id").primaryKey(),
+  id: uuid("id").primaryKey().defaultRandom(),
   stepId: uuid("step_id").references(() => steps.id).notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),

@@ -1,8 +1,8 @@
 // ? Dééfinition de la table des utilisateurs
-import { pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
-    id: uuid('id').primaryKey(),
+    id: uuid('id').primaryKey().defaultRandom(),
     email: varchar('email', { length: 255 }).notNull().unique(),
     username: varchar('username', { length: 255 }).notNull().unique(),
     password: varchar('password', { length: 255 }).notNull(),
