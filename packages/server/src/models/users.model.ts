@@ -6,7 +6,7 @@ import logger from '../utils/logger';
 import { eq } from 'drizzle-orm';
 
 
-// ? Création de l'objet qui contient les relations pour les requêtes imbriquées
+// Création de l'objet qui contient les relations pour les relations imbriquées
 const taskWith = {
   columns: { id: true, title: true, description: true, substepId: true, dueDate: true, status: true, createdAt: true, updatedAt: true }
 };
