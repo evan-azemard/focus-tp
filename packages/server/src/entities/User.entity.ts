@@ -1,4 +1,4 @@
-// ? Utile pour typer la table users dans les requêtes
+// ? Utile pour typer la table users dans les requêtes à partir des schemas
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { users } from "../schemas";
 
