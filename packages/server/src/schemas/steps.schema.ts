@@ -5,8 +5,8 @@ import { users } from "./users.schema";
 
 export const steps = pgTable("steps", {
   id: uuid("id").primaryKey().defaultRandom(),
-  goalId: uuid("goal_id").references(() => goals.id).notNull(),
-  userId: uuid('user_id').references(() => users.id).notNull(),
+  goalId: uuid("goal_id").references(() => goals.id, { onDelete: "cascade"}).notNull(),
+  userId: uuid('user_id').references(() => users.id, { onDelete: "set null" }),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   dueDate: date("due_date"),
