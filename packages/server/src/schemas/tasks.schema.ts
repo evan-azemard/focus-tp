@@ -1,10 +1,12 @@
 // ? Dééfinition de la table des tâches
 import { pgTable, uuid, varchar, text, date, timestamp } from "drizzle-orm/pg-core";
 import { substeps } from "./substeps.schema";
+import { users } from "./users.schema";
 
 export const tasks = pgTable("tasks", {
   id: uuid("id").primaryKey().defaultRandom(),
   substepId: uuid("substep_id").references(() => substeps.id).notNull(),
+  userId: uuid('user_id').references(() => users.id).notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   dueDate: date("due_date"),

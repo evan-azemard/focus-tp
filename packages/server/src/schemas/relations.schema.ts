@@ -24,6 +24,10 @@ export const stepsRelation = relations(steps, ({ one, many }) => ({
         fields: [steps.goalId], 
         references: [goals.id],
     }),
+        user: one(users, {
+        fields: [steps.userId],
+        references: [users.id],
+    }),
     substeps: many(substeps),
 }));
 
@@ -33,6 +37,10 @@ export const substepsRelations = relations(substeps, ({ one, many}) => ({
         fields: [substeps.stepId], 
         references: [steps.id],
     }),
+        user: one(users, {
+        fields: [substeps.userId],
+        references: [users.id],
+    }),
     tasks: many(tasks)
 }));
 
@@ -41,5 +49,9 @@ export const tasksRelations = relations(tasks, ({ one}) => ({
     substeps: one(substeps, {
         fields: [tasks.substepId], 
         references: [substeps.id],
-    })
+    }),
+        user: one(users, {
+        fields: [tasks.userId],
+        references: [users.id],
+    }),
 }))
