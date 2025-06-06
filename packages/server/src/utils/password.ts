@@ -17,13 +17,13 @@ export const hashPassword = async (password: string) => {
         });
         return hash;
     } catch (err: any) {
-        const msg = "Erreur lors du hashage de mot de passe"
-        logError("UTILS_PASSWORD_HASHPASSWORD", new Error(msg), msg)
+        const msg = "Erreur lors du hashage de mot de passe";
+        logError("UTILS_PASSWORD_HASHPASSWORD", new Error(msg), msg);
     }
 }
 
 // * Vérification du mot de passe
-export const VerifyPassword = async (hashedPassword: string, password: string) => {
+export const verifyPassword = async (hashedPassword: string, password: string) => {
     try {
         const verify = await argon2.verify(hashedPassword, password);
         logger.info("[UTILS_HASH]", {
@@ -33,7 +33,7 @@ export const VerifyPassword = async (hashedPassword: string, password: string) =
 
         return verify;
     } catch (err: any) {
-        const msg = "Erreur lors de la vérification du mot de passe"
-        logError("UTILS_PASSWORD_VERIFY-PASSWORD", new Error(msg), msg)
+        const msg = "Erreur lors de la vérification du mot de passe";
+        logError("UTILS_PASSWORD_VERIFY-PASSWORD", new Error(msg), msg);
     }
 }
