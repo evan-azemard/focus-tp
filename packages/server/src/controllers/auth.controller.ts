@@ -33,8 +33,8 @@ const authController = {
                 return APIResponse(response, null, "Les identifiants sont incorrectes", 400);
             }
 
-            // * Génération du jwt
-            const accessToken = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
+            // * Génération du jwt avec les informations de l'utilisateur pour les utilisé si besoins
+            const accessToken = jwt.sign({ id: user.id, isAdmin: user.isAdmin, username: user.username, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
 
             // * Génération du cookie dans l'en-tête de la response
             response.cookie('accesToken', accessToken, {
