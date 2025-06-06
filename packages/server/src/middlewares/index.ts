@@ -1,1 +1,2 @@
-export * from './isauthentificated';
+export * from './isAuthentificated';
+export * from './isAdmin'
