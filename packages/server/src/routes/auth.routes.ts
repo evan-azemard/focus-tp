@@ -5,13 +5,13 @@ import { authController } from '../controllers';
 const router = Router();
 
 // Enregistrement
-router.post('/', authController.register );
+router.post('/register', authController.register );
 
 // Connexion
-router.post('/', authController.login );
+router.post('/login', authController.login );
 
 // Déconnexion
-router.post('/', authController.logout );
+router.post('/logout', authController.logout );
 
 
 export default router;
