@@ -65,6 +65,7 @@ export const userModel = {
                 email: users.email,
                 password: users.password,
                 registeredAt: users.registeredAt,
+                isAdmin: users.isAdmin
             }).from(users).where(eq(users.email, email));
         } catch (err: any) {
             logError('USER_MODEL_FIND_BY_CREDENTIALS_ERROR', err, 'Erreur lors de la récupération de l\'utilisateur par email', { email });
