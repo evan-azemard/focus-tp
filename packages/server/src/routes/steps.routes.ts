@@ -1,16 +1,23 @@
-// ? Définition des routes pour les étapes
+// ! Définition des routes pour les étapes
+
 import { Router } from 'express';
+import stepController from '../controllers/step.controller';
 
 const router = Router();
 
-router.get('/', );
+// * Récupérer toutes les étapes
+router.get('/', stepController.getAll);
 
-router.get('/:stepId', );
+// * Récupérer une étape par son ID
+router.get('/:stepId', stepController.get);
 
-router.post('/',);
+// * Créer une nouvelle étape
+router.post('/', stepController.create);
 
-router.put('/:stepId',)
+// * Mettre à jour une étape existante
+router.put('/:stepId', stepController.update);
 
-router.delete('/:stepId', );
+// * Supprimer une étape
+router.delete('/:stepId', stepController.delete);
 
 export default router;

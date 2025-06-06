@@ -1,16 +1,23 @@
-// ? Définition des routes pour les sous-etapes
+// ! Routes pour gérer les sous-étapes : récupération, création, mise à jour et suppression
+
 import { Router } from 'express';
+import { substepController } from '../controllers/';
 
 const router = Router();
 
-router.get('/', );
+// * Récupère toutes les sous-étapes d'une étape (paramètre stepId en query)
+router.get('/', substepController.getAll);
 
-router.get('/:substepId', );
+// * Récupère une sous-étape par son ID
+router.get('/:substepId', substepController.getOne);
 
-router.post('/',);
+// * Crée une nouvelle sous-étape
+router.post('/', substepController.create);
 
-router.put('/:substepId',)
+// * Met à jour une sous-étape existante par son ID
+router.put('/:substepId', substepController.update);
 
-router.delete('/:substepId', );
+// * Supprime une sous-étape par son ID
+router.delete('/:substepId', substepController.delete);
 
 export default router;
