@@ -9,7 +9,7 @@ const router = Router();
 router.get('/', substepController.getAll);
 
 // * Récupère une sous-étape par son ID
-router.get('/:substepId', substepController.getOne);
+router.get('/:substepId', substepController.get);
 
 // * Crée une nouvelle sous-étape
 router.post('/', substepController.create);
