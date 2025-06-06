@@ -2,7 +2,7 @@
 import { Goal, NewGoal } from '../entities/Goal.entity';
 import { db } from '../config/pool';
 import { goals } from '../schemas';
-import logger, { logError } from '../utils/logger';
+import { logError } from '../utils/logger';
 import { and, eq } from 'drizzle-orm';
 
 // ? Relations imbriquées pour plus de lisibilité des données
@@ -41,9 +41,9 @@ export const goalModel = {
     },
 
     // * Récupération d'un objectif par son ID avec ses étapes, sous-étapes et tâches
-    get: async (id: string, authorId: string, isAdmin: boolean = false) => {
+    get: async (goalId: string, authorId: string, isAdmin: boolean = false) => {
         try {
-            const whereClause = isAdmin ? eq(goals.id, id) : and(eq(goals.id, id), eq(goals.userId, authorId)); // Si l'utilisateur est admin, il peut récupérer n'importe quel objectif, sinon il ne peut récupérer que ses propres objectifs
+            const whereClause = isAdmin ? eq(goals.id, goalId) : and(eq(goals.id, goalId), eq(goals.userId, authorId)); // Si l'utilisateur est admin, il peut récupérer n'importe quel objectif, sinon il ne peut récupérer que ses propres objectifs
 
             return await db.query.goals.findFirst({
                 where: whereClause,
@@ -51,7 +51,7 @@ export const goalModel = {
             });
         } catch (err: any) {
             logError('GOAL_MODEL_GET_ERROR]', err, "Erreur lors de la récupération de l'objectif", {
-                id,
+                goalId,
                 authorId,
                 isAdmin
             })
@@ -77,14 +77,14 @@ export const goalModel = {
     },
 
     // * Mise à jour d'un objectif
-    update: async (id: string, data: Partial<Goal>, authorId: string, isAdmin: boolean = false) => { // Partial pour permettre la mise à jour partielle en ts, isAdmin pour modifier en tant qu'admin
+    update: async (goalId: string, data: Partial<Goal>, authorId: string, isAdmin: boolean = false) => { // Partial pour permettre la mise à jour partielle en ts, isAdmin pour modifier en tant qu'admin
         try {
-            const whereClause = isAdmin ? eq(goals.id, id) : and(eq(goals.id, id), eq(goals.userId, authorId)); // Si l'utilisateur est admin, il peut modifier n'importe quel objectif, sinon il ne peut modifier que ses propres objectifs
+            const whereClause = isAdmin ? eq(goals.id, goalId) : and(eq(goals.id, goalId), eq(goals.userId, authorId)); // Si l'utilisateur est admin, il peut modifier n'importe quel objectif, sinon il ne peut modifier que ses propres objectifs
 
             return await db.update(goals).set(data).where(whereClause);
         } catch (err: any) {
             logError('GOAL_MODEL_UPDATE_ERROR', err, "Erreur lors de la mise à jour de l'objectif", {
-                id,
+                goalId,
                 authorId,
                 isAdmin,
                 data
@@ -94,14 +94,14 @@ export const goalModel = {
     },
 
     // * Suppression d'un objectif
-    delete: async (id: string, authorId: string, isAdmin: boolean = false) => {
+    delete: async (goalId: string, authorId: string, isAdmin: boolean = false) => {
         try {
-            const whereClause = isAdmin ? eq(goals.id, id) : and(eq(goals.id, id), eq(goals.userId, authorId)); // Si l'utilisateur est admin, il peut supprimer n'importe quel objectif, sinon il ne peut supprimer que ses propres objectifs
+            const whereClause = isAdmin ? eq(goals.id, goalId) : and(eq(goals.id, goalId), eq(goals.userId, authorId)); // Si l'utilisateur est admin, il peut supprimer n'importe quel objectif, sinon il ne peut supprimer que ses propres objectifs
 
             return await db.delete(goals).where(whereClause);
         } catch (err: any) {
             logError('GOAL_MODEL_DELETE_ERROR', err, 'Erreur lors de la suppression de l\'objectif', {
-                id,
+                goalId,
                 authorId,
                 isAdmin,
             })
