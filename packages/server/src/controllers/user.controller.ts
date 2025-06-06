@@ -1,4 +1,5 @@
 // ! Contrôleur gérant les opérations CRUD sur les utilisateurs (récupération, modification, suppression).
+
 import { Request, Response } from 'express';
 import { APIResponse, logError } from '../utils';
 import { userModel } from '../models/users.model';
@@ -29,7 +30,7 @@ const userController = {
     // * Récupération de la liste des utilisateurs
     getAll: async (_req: Request, res: Response) => {
         try {
-            const isAdmin = res.locals.user?.isAdmin;
+            const isAdmin = res.locals.isAdmin ?? false;
 
             if (!isAdmin) {
                 const msg = "Accès non autorisé à la liste des utilisateurs";
@@ -58,7 +59,7 @@ const userController = {
             const { id } = req.params;
             const data = req.body;
             const requesterId = res.locals.user?.id;
-            const isAdmin = res.locals.user?.isAdmin;
+            const isAdmin = res.locals.isAdmin ?? false;
 
             const updated = await userModel.update(id, data, requesterId, isAdmin);
 
@@ -80,7 +81,7 @@ const userController = {
         try {
             const { id } = req.params;
             const requesterId = res.locals.user?.id;
-            const isAdmin = res.locals.user?.isAdmin;
+            const isAdmin = res.locals.isAdmin ?? false;
 
             await userModel.delete(id, requesterId, isAdmin);
 

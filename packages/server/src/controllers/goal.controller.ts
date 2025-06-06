@@ -1,4 +1,5 @@
 // ! Contrôleur assurant la gestion des objectifs utilisateur : création, lecture, mise à jour, suppression.
+
 import { Request, Response } from 'express';
 import { goalModel } from '../models/goals.model';
 import { APIResponse, logError } from '../utils';
@@ -8,7 +9,7 @@ const goalController = {
   getAll: async (req: Request, res: Response) => {
     try {
       const authorId = res.locals.user?.id;
-      const isAdmin = res.locals.user?.isAdmin;
+      const isAdmin = res.locals.isAdmin ?? false;
 
       const goals = await goalModel.getAll(authorId, isAdmin);
 
@@ -30,7 +31,7 @@ const goalController = {
     try {
       const { goalId } = req.params;
       const authorId = res.locals.user?.id;
-      const isAdmin = res.locals.user?.isAdmin;
+      const isAdmin = res.locals.isAdmin ?? false;
 
       const goal = await goalModel.get(goalId, authorId, isAdmin);
 
@@ -68,7 +69,7 @@ const goalController = {
       const { goalId } = req.params;
       const data = req.body;
       const authorId = res.locals.user?.id;
-      const isAdmin = res.locals.user?.isAdmin;
+      const isAdmin = res.locals.isAdmin ?? false;
 
       const updated = await goalModel.update(goalId, data, authorId, isAdmin);
 
@@ -90,7 +91,7 @@ const goalController = {
     try {
       const { goalId } = req.params;
       const authorId = res.locals.user?.id;
-      const isAdmin = res.locals.user?.isAdmin;
+      const isAdmin = res.locals.isAdmin ?? false;
 
       await goalModel.delete(goalId, authorId, isAdmin);
 
