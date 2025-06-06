@@ -1,34 +1,51 @@
-# 🎯 Description API
+# Description API
 
-Une API RESTful en TypeScript permettant aux utilisateurs de gérer efficacement leurs objectifs.
-Un objectif principal peut être divisé en sous-objectifs appelés étapes. 
-Ces étapes peuvent à leur tour être subdivisées en sous-étapes, jusqu’à atteindre le niveau le 
-plus bas : la tâche.
+API RESTful en TypeScript permettant la gestion hiérarchique d’objectifs (objectifs, étapes, sous-étapes, tâches).
 
+## Technologies utilisées
 
-## 📦 Tech Stack
+* Node.js + Express
+* TypeScript
+* Drizzle ORM avec PostgreSQL
+* Zod pour la validation des données
+* JWT pour l’authentification
+* Winston pour le logging
+* dotenv pour la configuration
+* Architecture MVC
 
-- **Node.js + Express**
-- **TypeScript**
-- **Drizzle ORM** avec **PostgreSQL**
-- **Zod** pour la validation
-- **JWT** pour l’authentification
-- **Winston** pour le logging
-- **dotenv** pour la configuration
-- Architecture **MVC**
+## Fonctionnalités principales
 
-## 📚 Fonctionnalités principales
+* Authentification (inscription, connexion, édition du compte)
+* Gestion hiérarchique des objectifs et sous-objectifs
+* Statuts : "non commencé", "en cours", "terminé"
+* Contraintes sur les dates (respect des dates parents)
+* Validation stricte des données
+* Traçage des requêtes et erreurs via Winston
 
-- Authentification (connexion / inscription / édition compte)
-- Gestion hiérarchique des objectifs :
-  - Objectifs → Étapes → Sous-étapes → Tâches
-- Statuts : "non commencé" | "en cours" | "terminé"
-- Contraintes de dates (ne pas dépasser celles du parent ou commencer avant)
-- Validation des données avec Zod
-- Logger Winston pour tracer les requêtes et erreurs
+## Installation et lancement
 
-## 🛠 Installation
+1. Installer les dépendances racine :
 
 ```bash
 pnpm install
-pnpm dev
+```
+
+2. Générer le client Drizzle ORM (si applicable) :
+
+```bash
+pnpm generate
+```
+
+3. Appliquer les migrations :
+
+```bash
+pnpm migrate
+```
+
+4. Lancer le serveur en mode développement :
+
+```bash
+pnpm run dev:server
+```
+
+---
