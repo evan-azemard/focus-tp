@@ -1,16 +1,22 @@
-// ? Définition des routes pour les objectifs
+// ! Définition des routes API liées aux objectifs, point d’entrée des requêtes vers le goal.controller.
 import { Router } from 'express';
+import goalController from '../controllers/goal.controller';
 
 const router = Router();
 
-router.get('/', );
+// * Récupère tous les objectifs de l'utilisateur
+router.get('/', goalController.getAll);
 
-router.get('/:goalId', );
+// * Récupère un objectif précis par son ID (contrôle d'accès)
+router.get('/:goalId', goalController.get);
 
-router.post('/',);
+// * Crée un nouvel objectif pour l'utilisateur connecté
+router.post('/', goalController.create);
 
-router.put('/:goalId',)
+// * Met à jour un objectif existant
+router.put('/:goalId', goalController.update);
 
-router.delete('/:goalId', );
+// * Supprime un objectif 
+router.delete('/:goalId', goalController.delete);
 
 export default router;

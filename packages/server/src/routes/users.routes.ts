@@ -1,16 +1,19 @@
-// ? Définition des routes pour les utilisateurs
+// ! Définition des routes API pour la gestion des utilisateurs, point d’entrée des requêtes vers le user.controller.
 import { Router } from 'express';
-
+import { isAuthentificated } from '../middlewares';
+import { userController } from '../controllers';
 const router = Router();
 
-router.get('/', );
+// * Récupère la liste de tous les utilisateurs (réservé aux admins)
+router.get('/', isAuthentificated, userController.getAll );
 
-router.get('/:userId', );
+// * Récupère un utilisateur précis par son ID
+router.get('/:userId', isAuthentificated,  userController.get);
 
-router.post('/',);
+// * Met à jour un utilisateur existant
+router.put('/:userId', isAuthentificated,  userController.update);
 
-router.put('/:userId',)
-
-router.delete('/:userId', );
+// * Supprime un utilisateur
+router.delete('/:userId', isAuthentificated, userController.delete);
 
 export default router;
