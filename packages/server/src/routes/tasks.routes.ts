@@ -1,16 +1,21 @@
-// ? Définition des routes pour les tâches
+// ! Définition des routes pour les tâches
 import { Router } from 'express';
+import taskController from '../controllers/task.controller';
 
 const router = Router();
+// * Récupérer toutes les tâches (requiert query ?substepId=)
+router.get('/', taskController.getAll);       
 
-router.get('/', );
+// * Récupérer une tâche par ID
+router.get('/:taskId', taskController.get);     
 
-router.get('/:taskId', );
+// * Créer une nouvelle tâche
+router.post('/', taskController.create);
 
-router.post('/',);
+// * Mettre à jour une tâche par ID
+router.put('/:taskId', taskController.update);   
 
-router.put('/:taskId',)
-
-router.delete('/:taskId', );
+// * Supprimer une tâche par ID
+router.delete('/:taskId', taskController.delete);
 
 export default router;
