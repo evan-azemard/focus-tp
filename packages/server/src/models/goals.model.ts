@@ -60,16 +60,16 @@ export const goalModel = {
     },
 
     // * Création d'un nouvel objectif
-    create: async (goal: NewGoal, authorId: string) => { // goal équivaut à là base -> req.body
+    create: async (goal: NewGoal) => { // goal équivaut à là base -> req.body
         try {
             return await db.insert(goals).values({
                 ...goal,
-                userId: authorId,
+                userId: goal.userId,
             }).returning(); // On retourne l'objectif créé pour afficher les données au client
         } catch (err: any) {
             logError('GOAL_MODEL_CREATE_ERROR', err, "Erreur lors de la création de l'objectif", {
                 id: null,
-                authorId,
+                authorId: goal.userId,
                 isAdmin: null
             })
             throw new Error('Erreur lors de la création de l\'objectif');

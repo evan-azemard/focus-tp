@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { goalModel } from '../models/goals.model';
 import { APIResponse, logError } from '../utils';
 import logger from '../utils/logger';
+import { goalCreatedValidation } from '../validations';
 
 const goalController = {
   getAll: async (req: Request, res: Response) => {
@@ -52,9 +53,16 @@ const goalController = {
   create: async (req: Request, res: Response) => {
     try {
       const authorId = res.locals.user?.id;
-      const data = req.body;
 
-      const createdGoal = await goalModel.create(data, authorId);
+      const validatedData = goalCreatedValidation.parse(req.body);
+
+      const goalWithUserId = {
+        ...validatedData,
+        userId: authorId!,
+      };
+
+      const createdGoal = await goalModel.create(goalWithUserId);
+
 
       logger.log("[POST_CONTROLLERS_GOALS]", "Objectif créé");
       APIResponse(res, createdGoal, "Objectif créé");
