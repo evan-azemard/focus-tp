@@ -2,9 +2,9 @@
 import { Request, response, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { env } from '../config/env';
-import { hashPassword, logError, verifyPassword } from '../utils/';
+import { hashPassword, logError, verifyPassword } from '../utils';
 import { userModel } from '../models/users.model';
-import { APIResponse } from '../utils/';
+import { APIResponse } from '../utils';
 import logger from '../utils/logger';
 import { z } from 'zod';
 import { userRegisterValidation } from '../validations';
