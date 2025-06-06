@@ -3,4 +3,4 @@ import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { goals } from "../schemas";
 
 export type Goal = InferSelectModel<typeof goals>;
-export type newGoal = InferInsertModel<typeof goals>;
+export type NewGoal = InferInsertModel<typeof goals>;

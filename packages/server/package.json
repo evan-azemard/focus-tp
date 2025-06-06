@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "concurrently \"tsc --watch\" \"tsnd --respawn src/server.ts\"",
+    "dev": "concurrently \"tsc --watch\" \"tsnd --respawn src/app.ts\"",
     "generate": "drizzle-kit generate --config=src/config/drizzle.ts",
     "migrate": "tsx src/config/migrate.ts",
     "studio": "drizzle-kit studio --config=src/config/drizzle.ts"

@@ -1,3 +1,6 @@
+logs
+*.log
+
 **/node_modules/
 
 # env
@@ -5,3 +8,9 @@
 !**/.env.exmample
 
 questions.txt
+
+dist
+
+/packages/server/src/migrations/meta/**
+/packages/server/src/migrations/meta/*.json
+/packages/server/src/migrations/meta/_journal.json

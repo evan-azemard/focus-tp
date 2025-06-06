@@ -5,8 +5,8 @@ import { users } from './users.schema'
 
 export const goals = pgTable('goals', {
     id: uuid('id').primaryKey().defaultRandom(),
-    userId: uuid('user_id').references(() => users.id).notNull(),
-    name: varchar('name', { length: 255 }).notNull(),
+    userId: uuid('user_id').references(() => users.id, { onDelete: "set null" }).notNull(),
+    title: varchar('title', { length: 255 }).notNull(),
     description: varchar("description", { length: 255 }),
     startDate: date('start_date').notNull(),
     dueDate: date('dueDate').notNull(),
